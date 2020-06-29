@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>The Blue Follow Project</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Habib Aghasafari</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="generic.html">Generic</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>The Blue Follow Project</h2>
+							<p>Demonstrating my expertise in writing custom software for the Universal Robots platform</p>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+
+								<section>
+									<h3>First video of the project</h3>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<iframe width="560" height="315" src="https://www.youtube.com/embed/Ua0UDlGi5XY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+										</div>
+									</div>
+									<h4>Project date:</h4>
+									<p>June 2020</p>
+									<h4>Project hardware:</h4>
+									<p> I used a UR3 robot, an Intel Realsense camera and a laptop running Linux.</p>
+									<h4>Project Description:</h4>
+									<p align="justify">The goal of this project is to autonomously detect the blue circle and then follow it with the UR3 robot. The camera is attached to the end effector of the robot.<br /><br />
+                                        First, the camera takes a picture, then my computer vision algorithm will detect the centre of the blue circle in the image, and it calculates the angle of that centre with respect to the centre of the image. Then it will determine in with direction in the XY plane the robot should move. Then it passes this information to my custom UR3 kinematics algorithm. This algorithm calculates what velocity each joint must reach in order to achieve the desired movement.<br /><br />
+                                        I also wrote a custom collision avoidance algorithm that runs concurrently with the main program. This collision avoidance program constantly watches the joint states of the robot to make sure the robot will not crash to itself or the ground. If it sees that the robot is about to crash, it will publish a no-go command and stops the robot, otherwise, it publishes a go command. This algorithm publishes a go/no-go command more than 56,000 times each second.<br /><br />
+                                        Once the main program calculates the desired joint velocities, before it sends these velocities to the robot, it first checks this go/no-go commands that are coming out of the collision avoidance system. If the command is a go, then it will send the velocities to the robot, but if the command is a no-go, then it will not do anything until it receives a go command again.<br /><br />
+                                        All of these different programs interact with each other through the Robotic Operating System or ROS. 
+                                    </p>
+								</section>
+
+							</div>
+							
+						</section>
+						
+					</article>
+				</div>
+				<!-- Linkedin Badge -->	
+				<section id="cta" class="wrapper style4">
+					<div class="inner">
+						<a href="http://www.linkedin.com/in/habib-aghasafari"><span class="image left"><img src="images/in.png" alt="" />My Linkedin account</a>
+					</div>
+				</section>
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="copyright">
+							<li>&copy; Habib Aghasafari</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</footer>
+
+			
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+	</body>
+</html>
