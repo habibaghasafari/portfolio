@@ -23,11 +23,11 @@
 						<nav id="nav">
 							<ul>
 								<li class="special">
-									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<a href="#menu" class="menuToggle"><span>CV</span></a>
 									<div id="menu">
 										<ul>
 											<li><a href="index.html">Home</a></li>
-											<li><a href="generic.html">Generic</a></li>
+											<li><a href="CV.html">CV</a></li>
 										</ul>
 									</div>
 								</li>
@@ -54,9 +54,24 @@
 									<h4>Project date:</h4>
 									<p>March 2019</p>
 									<h4>Project hardware:</h4>
-									<p> I used a UR3 robot, a raspberry pi3, a claw gripper with servo motor, a USB webcam and a laptop running Linux.</p>
-									<h4>Project Description</h4>
-									<p>The goal of this project is to autonomouly detect and pick multiple apples and place them into a container.</p>
+									<p> I used a UR3 robot, a raspberry pi 3, a claw gripper with servo motor, a USB webcam and a laptop running Linux.</p>
+									<h4>Project Description:</h4>
+									<p align="justify">The goal of this project is to autonomously detect and pick multiple apples and place them into a container.<br /><br />
+                                        The camera is attached to the end effector of the robot. First, I take a picture with the camera. Then my computer vision algorithm detects the centre of one of the apples and compares it with the centre of the image. From this, it calculates the direction in the XY plane that the robot has to move.
+                                        Then pass this information to my custom kinematics algorithm. My kinematics algorithm calculates a set of joint angles that correspond to the target position in XYZ space. It also checks that the trajectory from the current joint angles to the target
+                                        joint angles are safe and the robot will not crash to itself or the ground. <br /><br />
+                                        This process will happen a few times until the centre of the selected apple aligned with the centre of the image. At this point, we know that the camera is aligned with the selected apple. Then the kinematics algorithm calculates the joint angles for a decent to a point with the same XY value and a Z value of only 25 
+                                        centimetres above the ground. <br /><br />
+                                        After this decent, the centre of the image may drift a little from the centre of the apple. Therefore the initial alignment process will repeat this time in a lower altitude to align the centre of the apple with the centre of the image again.<br /><br />
+                                        At this stage, a predefined and final decent movement will be executed to place the apple in between the gripper's fingers. This movement is predefined because, in the final movement, the apple will inevitably go out of the field of view of the camera. To address this issue, I brought the robot
+                                        to a know position 25 centimetres above the table and the camera aligned with the apple. Because relative to apple's coordinate frame, this position is almost always the same, it is possible to measure beforehand what relative movement needs to occur to bring the gripper to 
+                                        a position that can grab the apple. <br /><br />
+                                        When the gripper is in position to grab the apple, my main program will send a command to the raspberry pi to turn the servo to close the gripper. Once the gripper is closed, The main program brings the robot to a predefined position that is above the container and then send a command to raspberry pi to open the gripper.
+                                        After that, the robot moves to its default position to detect another apple and repeat the whole process again.<br /><br />
+                                        All system communication between the main program on my laptop and the raspberry pi and the robot is done using the Robot Operating System or ROS.<br /><br />
+										The above video is in real-time and has not sped up.<br /><br />
+										You occasionally see that the apple falls before the gripper is fully open. This is because the gripper used here is a cheap and low-quality part. It sometimes cannot hold the weight of the apple even though it's fully closed.<br /><br />
+									</p>
 								</section>
 
 							</div>
