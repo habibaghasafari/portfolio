@@ -70,7 +70,8 @@
                                         Also, at each step of adding commands, it checks for self-crash or crash to the ground. If it sees a crash due to a given command, it will only execute the commands that came before that command 
                                         and ignores any command after that. If the command that causes the crash is the first command in the string, then no movement will be executed. This is to make sure the operator cannot crash the robot even if he/she tries. <br /><br />
                                         It will do the same for the gripper. It will calculate what the angle of gripper should be based on the string of input commands and then send the results to the raspberry pi to execute. Of course, 
-                                        it will not allow the gripper to be closed or opened more than it can even if the operator commands it.<br /><br />
+										it will not allow the gripper to be closed or opened more than it can even if the operator commands it.<br /><br />
+										The Raspberry pi node is implemented in C, collision avoidance and kinematics algorithms are implemented in one node in MATLAB, and these nodes communicate with each other and the UR3 robot using the Robot Operating System or ROS.<br /><br />
                                         The above video isn't in real-time and has sped up.<br /><br />
                                         You see that the apple falls in the first try. This is because the gripper used here is a cheap and low-quality part. It sometimes cannot hold the weight of the apple even though it's fully closed.<br /><br />
 									</p>

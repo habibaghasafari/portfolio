@@ -67,8 +67,8 @@
                                         to a know position 25 centimetres above the table and the camera aligned with the apple. Because relative to apple's coordinate frame, this position is almost always the same, it is possible to measure beforehand what relative movement needs to occur to bring the gripper to 
                                         a position that can grab the apple. <br /><br />
                                         When the gripper is in position to grab the apple, my main program will send a command to the raspberry pi to turn the servo to close the gripper. Once the gripper is closed, The main program brings the robot to a predefined position that is above the container and then send a command to raspberry pi to open the gripper.
-                                        After that, the robot moves to its default position to detect another apple and repeat the whole process again.<br /><br />
-                                        All system communication between the main program on my laptop and the raspberry pi and the robot is done using the Robot Operating System or ROS.<br /><br />
+										After that, the robot moves to its default position to detect another apple and repeat the whole process again.<br /><br />
+										The Raspberry pi node is implemented in C, the computer vision and kinematics algorithms are implemented in one node in MATLAB, and these nodes communicate with each other and the UR3 robot using the Robot Operating System or ROS.<br /><br />
 										The above video is in real-time and has not sped up.<br /><br />
 										You occasionally see that the apple falls before the gripper is fully open. This is because the gripper used here is a cheap and low-quality part. It sometimes cannot hold the weight of the apple even though it's fully closed.<br /><br />
 									</p>
