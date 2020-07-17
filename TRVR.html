@@ -67,19 +67,32 @@
                                         I also plan to use a real robot, either a UR3 or a PR2 robot in the later stages of the project.
                                     </p>
 									<h4>Project Description:</h4>
-                                    <p align="justify">This project is part of my Engineering Capstone subject. <br /><br />
-                                        The goal of this project is to control a robot remotely (over the Internet) using a virtual reality headset. This is called Telerobotics.<br /><br />
-                                        Applications of this system:<br />
-                                        Remote teleoperation in hospitals and nursing homes, especially when caring for a patient with infectious diseases like COVID-19. A nurse can stay at home, put on her VR headset and remotely be transferred to a robot that is in hospital and work with COVID-19 patients in the safety and convenience of her home. While not every delicate task in a hospital can be remotely done by robots, there are a lot of low dexterity tasks that can be done this way. Like cleaning a table, taking the trash out and put it in bins, pushing a wheelchair, bringing food or water for the patient, etc.
-                                        Although I will not be able to deliver something that is ready to be used in hospitals by the end of my capstone project on February 2021, I will be able to make a proof of concept system that can demonstrate the feasibility of this idea.
+                                    <p style="text-align: justify">This project is part of my Engineering Capstone subject. <br /><br />
+                                        The goal of this project is to control a robot remotely (over the Internet) using a virtual reality headset. This is called Telerobotics.</p>
+									<p style = "margin-bottom: 13px">Applications of this system:</p>
+									<p style="text-align: justify">Remote teleoperation in hospitals and nursing homes, especially when caring for a patient with infectious diseases like COVID-19. A nurse can stay at home, put on her VR headset and remotely be transferred to a robot 
+										that is in hospital and work with COVID-19 patients in the safety and convenience of her home. While not every delicate task in a hospital can be remotely done by robots, there are a lot of low dexterity tasks that can 
+										be done this way. Like cleaning a table, taking the trash out and put it in bins, pushing a wheelchair, bringing food or water for the patient, etc.<br />
+										Although I will not be able to deliver something that is ready to be used in hospitals by the end of my capstone project on February 2021, I will be able to make a proof of concept system that can demonstrate the 
+										feasibility of this idea.
                                     </p>
-                                    <h4>Stage1: Transfering VR tracking data to ROS </h4>
+									<h4>Stage1: Transfering VR tracking data to ROS </h4>
+									<p style = "margin-bottom: 13px">In the follwing video, a few things are happening:</p>
+									<p style = "margin-bottom: 7px">On the larger laptop running windows:</p>
+									<p style = "margin-left: 40px; margin-bottom: 0px">1- I acquire tracking data (position and orientation) of the headset and the two controllers</p>
+									<p style = "margin-left: 40px; margin-bottom: 0px">2- I encode the acquired data into a character array</p>
+									<p style = "margin-left: 40px; margin-bottom: 13px">3- Then I send that character array using a UDP packet to a know IP address and port</p>
+									<p style = "margin-bottom: 7px; margin-top: 13px">On the smaller laptop running Linux: (the monitor is connected to this laptop):</p>
+									<p style = "margin-left: 40px; margin-bottom: 0px">1- A ROS node receives the incoming UDP packets and decodes them</p>
+									<p style = "margin-left: 40px; margin-bottom: 0px">2- Then a TF broadcaster within that node, will publish the transforms messages into ROS environment</p>
+									<p style = "margin-left: 40px; margin-bottom: 20px">3- Finally, the RVIZ node will receive the TF messages and displays them in its 3D environment</p>
+
                                     <div class="box alt">
 										<div class="row gtr-50 gtr-uniform">
 											<iframe width="560" height="315" src="https://www.youtube.com/embed/SxyMhapJy3g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 										</div>
                                     </div>
-                                    <p align="justify">The above video is in real-time and has not sped up except the portion that is clearly marked with "Fast forward...".</p>
+                                    <p style="text-align: justify">The above video is in real-time and has not sped up except the portion that is clearly marked with "Fast forward...".</p>
 
 
 								</section>
