@@ -110,8 +110,7 @@
 									<h5 style = "margin-bottom: 7px; margin-top: 0px">On the laptop running Linux:</h5>
 									<p style = "margin-left: 40px; margin-bottom: 0px; text-align: justify">1- A ROS node receives the incoming UDP packets from the sender's specific IP address and port and then republishes them as ROS messages. Notice every UDP packet has sender's IP address, sender's port, destination IP address and destination port. 
 										The destination IP address and port must be correct so that the packet could reach this node in the first place. Then This node will also check that the Sender's IP address and port to ensure they match what it expects. Otherwise, the packet will be rejected. This is an important security measure to ensure only packets sent by an authorised user can affect the robot. 
-										The system security can be further strengthened by making the sender's acceptable port number a randomised value that only the sender and the server can calculate based on the current internet time and a security key, just like how the Google Authenticator app works. In this way, the acceptable sender's port can change every minute or every second. Once the packet is deemed authorised, 
-										then this node will check for the packet's ID number to make sure the packet is the latest. If the packet has been produced at some time before the last packet, it will be discarded. Then the node will check for the status of the trigger button. If the trigger is pulled, then it will republishes the XYZ velocities as ROS messages. This is because we don't want to move the robot with every move of our hand. (This node is implemented in C++)</p>
+										Then the node will check for the status of the trigger button. If the trigger is pulled, then it will republishes the XYZ velocities as ROS messages. This is because we don't want to move the robot with every move of our hand. (This node is implemented in C++)</p>
 									<p style = "margin-left: 40px; margin-bottom: 0px; text-align: justify">2- Then, a second ROS node receives the velocity messages and use them to calculate the joint angles required to move the robot in the desired direction. 
 										To simplify the inverse kinematics calculations, at this stage, the robot's movements are limited to moving only in the XY plane at the height of 27.7cm above the table's surface. Also, the robot's end-effector's direction is fixed and always directly pointing down. This node is currently implemented in MATLAB, but I plan to later convert it to Python or C++ for later versions</p>
 									<p style = "margin-left: 40px; margin-bottom: 20px; text-align: justify">3- Finally, a third node is continuously monitoring the robot's movements in the background. If it detects that the robot is about to collide with itself or 
@@ -122,14 +121,17 @@
 										</div>
                                     </div>
 									<p style="text-align: justify; margin-bottom: 40px">The above video is in real-time and has not sped up.</p>
-									<h4>Stage 3: Removing limitations of robot's movement using more Advanced Inverse Kinematics and adding randomised port authentication</h4>
+									<h4>Stage 3: Removing limitations of robot's movement using more Advanced Inverse Kinematics</h4>
 									<p style="text-align: justify">I am currently working on this stage.</p>
 
 
 									<h4>Stage 4: Adding gripper and object manipulation in simulation and integrating video conferencing for remote operation</h4>
 									<p style="text-align: justify">This stage is planned for future work.</p>
 
-									<h4>Stage 5: IMPLEMENTATION on the real robot </h4>
+									<h4>Stage 5: Pick and place operation in simulation </h4>
+									<p style="text-align: justify">This stage is planned for future work.</p>
+
+									<h4>Stage 6: Implimentation on the real robot and hardware </h4>
 									<p style="text-align: justify">This stage is planned for future work.</p>
 								</section>
 
