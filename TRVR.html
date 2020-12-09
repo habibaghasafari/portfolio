@@ -69,76 +69,41 @@
 									<h4>Project contributors:</h4>
 									<p>I am the sole project designer</p>
 									<h4>Project hardware:</h4>
-									<p> I use a virtual reality headset (the Oculus Quest). Also, I use a laptop running Windows and another laptop running Linux.<br />
-                                        I also plan to use a real robot, either a UR3 or a PR2 robot in the later stages of the project.
+									<p> I use a virtual reality headset (the Oculus Quest). Also, I use a PC running Windows and another laptop running Linux.<br />
+                                        I also use a real UR3 robot and plan to use a claw gripper with servo and raspberry pi to control it.
                                     </p>
 									<h4>Project Description:</h4>
                                     <p style="text-align: justify">This project is part of my Engineering Capstone subject. <br /><br />
-                                        The goal of this project is to control a robot remotely (over the Internet) using a virtual reality headset. This is called Telerobotics.</p>
-									<h5 style = "margin-bottom: 13px">Applications of this system:</h5>
+                                        The goal of this project is to control a robot remotely (over the Internet) using a virtual reality headset and perform tasks such as pick and place of small objects. This is called Telerobotics.</p>
+									<h4 style = "margin-bottom: 13px">Applications of this system:</h4>
 									<p style="text-align: justify">Remote teleoperation in hospitals and nursing homes, especially when caring for a patient with infectious diseases like COVID-19. A nurse can stay at home, put on her VR headset and remotely be transferred to a robot 
-										that is in hospital and work with COVID-19 patients in the safety and convenience of her home. While not every delicate task in a hospital can be remotely done by robots, there are a lot of low dexterity tasks that can 
+										that is in hospital and work with COVID-19 patients in the safety and convenience of her home. While not every delicate task in a hospital or nursing home can be remotely done by robots, there are a lot of low dexterity tasks that can 
 										be done this way. Like cleaning a table, taking the trash out and put it in bins, pushing a wheelchair, bringing food or water for the patient, etc.<br />
 										Although I will not be able to deliver something that is ready to be used in hospitals by the end of my capstone project on February 2021, I will be able to make a proof of concept system that can demonstrate the 
 										feasibility of this idea.
                                     </p>
-									<h4>Stage 1: Transfering VR tracking data to ROS </h4>
-									<p style = "margin-bottom: 13px">In the following video, a few things are happening:</p>
-									<h5 style = "margin-bottom: 7px">On the larger laptop running windows:</h5>
-									<p style = "margin-left: 40px; margin-bottom: 0px">1- I acquire tracking data (position and orientation) of the headset and the two controllers</p>
-									<p style = "margin-left: 40px; margin-bottom: 0px">2- I encode the acquired data into a character array</p>
-									<p style = "margin-left: 40px; margin-bottom: 13px">3- Then I send that character array using a UDP packet to a know IP address and port</p>
-									<h5 style = "margin-bottom: 7px; margin-top: 13px">On the smaller laptop running Linux: (the monitor is connected to this laptop):</h5>
-									<p style = "margin-left: 40px; margin-bottom: 0px">1- A ROS node receives the incoming UDP packets and decodes them</p>
-									<p style = "margin-left: 40px; margin-bottom: 0px">2- Then a TF broadcaster within that node, will publish the transforms messages into ROS environment</p>
-									<p style = "margin-left: 40px; margin-bottom: 20px">3- Finally, the RVIZ node will receive the TF messages and displays them in its 3D environment</p>
-
-                                    <div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<iframe width="560" height="315" src="https://www.youtube.com/embed/SxyMhapJy3g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-										</div>
-                                    </div>
-                                    <p style="text-align: justify">The above video is in real-time and has not sped up except the portion that is clearly marked with "Fast forward...".</p>
-									<h4>Stage 2: Using VR to control a UR3 in simulation </h4>
-									<p style = "margin-bottom: 13px">Here are the things that are happening In the following video:</p>
-									<h5 style = "margin-bottom: 7px">On the Desktop PC connected to the monitor and running windows:</h5>
-									<p style = "margin-left: 40px; margin-bottom: 0px">1- I acquire tracking data (velocity and orientation) plus the status of the trigger button of the right-hand controller</p>
-									<p style = "margin-left: 40px; margin-bottom: 0px; text-align: justify">2- I encode the acquired data into a character array. I add an integer as an ID number to the beginning of the data. This way, the other side can understand the order of the incoming packets and reject packets that got stuck in the network and arrived out of order.</p>
-									<p style = "margin-left: 40px; margin-bottom: 13px">3- Then I send that character array using a UDP packet to a know IP address and port </p>
-									<p style = "margin-bottom: 13px; text-align: justify"> Note that the PC is connected by wifi to the hotspot of a mobile phone that uses 4G mobile data. While the laptop is connected to the home network by an ethernet cable. 
-										The average ping between the two systems is 52ms. Port forwarding is enabled on my home router to direct all incoming UDP traffic from the specified port to the local IP address of the laptop. </p>
-									<h5 style = "margin-bottom: 7px; margin-top: 0px">On the laptop running Linux:</h5>
-									<p style = "margin-left: 40px; margin-bottom: 0px; text-align: justify">1- A ROS node receives the incoming UDP packets from the sender's specific IP address and port and then republishes them as ROS messages. Notice every UDP packet has sender's IP address, sender's port, destination IP address and destination port. 
-										The destination IP address and port must be correct so that the packet could reach this node in the first place. Then This node will also check that the Sender's IP address and port to ensure they match what it expects. Otherwise, the packet will be rejected. This is an important security measure to ensure only packets sent by an authorised user can affect the robot. 
-										Then the node will check for the status of the trigger button. If the trigger is pulled, then it will republishes the XYZ velocities as ROS messages. This is because we don't want to move the robot with every move of our hand. (This node is implemented in C++)</p>
-									<p style = "margin-left: 40px; margin-bottom: 0px; text-align: justify">2- Then, a second ROS node receives the velocity messages and use them to calculate the joint angles required to move the robot in the desired direction. 
-										To simplify the inverse kinematics calculations, at this stage, the robot's movements are limited to moving only in the XY plane at the height of 27.7cm above the table's surface. Also, the robot's end-effector's direction is fixed and always directly pointing down. This node is currently implemented in MATLAB, but I plan to later convert it to Python or C++ for later versions</p>
-									<p style = "margin-left: 40px; margin-bottom: 20px; text-align: justify">3- Finally, a third node is continuously monitoring the robot's movements in the background. If it detects that the robot is about to collide with itself or 
-										the table, it will issue ROS messages to immediately stop the robot and the MATLAB node. (This node is also implemented in C++) </p>
+									<h4>Current state of the project </h4>
+									<p style = "margin-bottom: 13px">So far, I have managed to get tracking data from the VR headset, transfer them over the Internet and create a kinematics algorithm to translate the tracking data 
+										into the appropriate joint angles and then send them to the robot. This kinematics software also checks for robot self-collision or collision to the ground before sending any data to the robot. The collision avoidance can later be improved to avoid dynamic obstacles in the environment as well. 
+										I also have developed my own video conferencing software using OpenCV that is much faster than Zoom or Facebook Messenger. The following video shows the first time that I test my entire system in the real world with a real UR3 robot:</p>
+									<p style = "margin-bottom: 13px">Here are the things that are happening In the video:</p>
+									<p style = "margin-left: 40px; margin-bottom: 0px">1- I am in the UTS mechatronics lab and connected my laptop to the robot and the University's wifi. My partner is 44 kilometres away at my home and is using my PC and VR headset and is connected to the home wifi.</p>
+									<p style = "margin-left: 40px; margin-bottom: 0px; text-align: justify">2- The tracking data from the VR headset is transmitted via the Internet to my laptop at UTS and then to the robot. My laptop also takes frames from a webcam and send them back to my PC at home.</p>
+									<p style = "margin-left: 40px; margin-bottom: 13px">3- Then my PC displays the incoming frames using OpenCV. My partner can then see this stream in VR through the Oculus Virtual Desktop software.</p>
 									<div class="box alt">
 										<div class="row gtr-50 gtr-uniform">
-											<iframe width="560" height="315" src="https://www.youtube.com/embed/Uzny6llCr_Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+											<iframe width="560" height="315" src="https://www.youtube.com/embed/0XgAPfmF7XE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 										</div>
                                     </div>
-									<p style="text-align: justify; margin-bottom: 40px">The above video is in real-time and has not sped up.</p>
-									<h4>Stage 3: Removing limitations of robot's movement using more Advanced Inverse Kinematics</h4>
-									<p style="text-align: justify">I am currently working on this stage.</p>
-
-
-									<h4>Stage 4: Adding gripper and object manipulation in simulation and integrating video conferencing for remote operation</h4>
-									<p style="text-align: justify">This stage is planned for future work.</p>
-
-									<h4>Stage 5: Pick and place operation in simulation </h4>
-									<p style="text-align: justify">This stage is planned for future work.</p>
-
-									<h4>Stage 6: Implimentation on the real robot and hardware </h4>
-									<p style="text-align: justify">This stage is planned for future work.</p>
+									<p style="text-align: justify; margin-bottom: 40px">The above video is in real-time and has not sped up.<br /> 
+										As you can see, there is a notable delay between when the operator's hand moves, to the moment that the robot matches that movement on the screen. This is because the movement needs to be tracked by the 
+										headset's cameras and then be acquired by the PC and then transmitted 44 kilometres over the Internet, then be received and then processed by my laptop on the other end to produce corresponding joint angles and then those joint angles need to be checked to ensure there will be no collisions. Then the joint angles can be sent to the robot. 
+										Then robot executes the movement, then that movement will be recorded by the webcam. The webcam feed then gets processed and send back 44 kilometres over the Internet to the PC. The PC then will receive and process the webcam feed and finally displays it on the monitor.<br />
+									Of course, this huge chain of events will produce delays, but this experiment shows the resulting delay while noticeable, is not too much. This is partly due to good wifi quality at both my house and the University campus and part due to my brilliant design and engineering skills.<br /> 
+									In my opinion, it is possible to do remote pick and place operations. With some help from AI algorithms on the robot's side and some simple training for the operator, this remote pick and place operations can be done safely and reliably. </p>
 								</section>
-
-							</div>
-							
-						</section>
-						
+							</div>	
+						</section>	
 					</article>
 				</div>
 				<!-- Linkedin Badge -->	
