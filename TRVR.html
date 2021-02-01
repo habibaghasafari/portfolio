@@ -63,44 +63,25 @@
 								<section>
 									
 									<h4>Project dates:</h4>
-									<p>Project started in December 2019<br />
-                                        Project expected to conclude in February 2021
-                                    </p>
+									<p>Project started in December 2019</p>
 									<h4>Project contributors:</h4>
 									<p>I am the sole project designer</p>
 									<h4>Project hardware:</h4>
-									<p> I use a virtual reality headset (the Oculus Quest). Also, I use a PC running Windows and another laptop running Linux.<br />
-                                        I also use a real UR3 robot and plan to use a claw gripper with servo and raspberry pi to control it.
-                                    </p>
+									<p style="text-align: justify"> I use a virtual reality headset (the Oculus Quest), a PC running Windows, a laptop running Linux. I also use a UR3 robot, a claw gripper with servo, arduino and two cameras.</p>
 									<h4>Project Description:</h4>
-                                    <p style="text-align: justify">This project is part of my Engineering Capstone subject. <br /><br />
-                                        The goal of this project is to control a robot remotely (over the Internet) using a virtual reality headset and perform tasks such as pick and place of small objects. This is called Telerobotics.</p>
+                                    <p style="text-align: justify">The goal of this project is to control a robot remotely (over the Internet) using a virtual reality headset and perform tasks such as pick and place of small objects. This is called Telerobotics.</p>
 									<h4 style = "margin-bottom: 13px">Applications of this system:</h4>
-									<p style="text-align: justify">Remote teleoperation in hospitals and nursing homes, especially when caring for a patient with infectious diseases like COVID-19. A nurse can stay at home, put on her VR headset and remotely be transferred to a robot 
-										that is in hospital and work with COVID-19 patients in the safety and convenience of her home. While not every delicate task in a hospital or nursing home can be remotely done by robots, there are a lot of low dexterity tasks that can 
-										be done this way. Like cleaning a table, taking the trash out and put it in bins, pushing a wheelchair, bringing food or water for the patient, etc.<br />
-										Although I will not be able to deliver something that is ready to be used in hospitals by the end of my capstone project on February 2021, I will be able to make a proof of concept system that can demonstrate the 
-										feasibility of this idea.
-                                    </p>
+									<p style="text-align: justify">Remote teleoperation in hospitals and nursing homes, especially when caring for patients with infectious diseases like COVID-19. Nurses can stay at home, put on their VR headsets and remotely be transferred to robots 
+										that are in hospital and work with COVID-19 patients in the safety and convenience of their home. While not every delicate task in a hospital or nursing home can be remotely done by robots, there are a lot of low dexterity tasks that can 
+										be done this way. Like cleaning a table, taking the trash out and put it in bins, pushing a wheelchair, bringing food or water for the patient, etc.</p>
 									<h4>Current state of the project </h4>
-									<p style = "margin-bottom: 13px">So far, I have managed to get tracking data from the VR headset, transfer them over the Internet and create a kinematics algorithm to translate the tracking data 
-										into the appropriate joint angles and then send them to the robot. This kinematics software also checks for robot self-collision or collision to the ground before sending any data to the robot. The collision avoidance can later be improved to avoid dynamic obstacles in the environment as well. 
-										I also have developed my own video conferencing software using OpenCV that is much faster than Zoom or Facebook Messenger. The following video shows the first time that I test my entire system in the real world with a real UR3 robot:</p>
-									<p style = "margin-bottom: 13px">Here are the things that are happening In the video:</p>
-									<p style = "margin-left: 40px; margin-bottom: 0px">1- I am in the UTS mechatronics lab and connected my laptop to the robot and the University's wifi. My partner is 44 kilometres away at my home and is using my PC and VR headset and is connected to the home wifi.</p>
-									<p style = "margin-left: 40px; margin-bottom: 0px; text-align: justify">2- The tracking data from the VR headset is transmitted via the Internet to my laptop at UTS and then to the robot. My laptop also takes frames from a webcam and send them back to my PC at home.</p>
-									<p style = "margin-left: 40px; margin-bottom: 13px">3- Then my PC displays the incoming frames using OpenCV. My partner can then see this stream in VR through the Oculus Virtual Desktop software.</p>
+									<p style = "margin-bottom: 13px">The following video shows the successful pick and place of several small objects. The operator on the left is 44 kilometres away from the robot arm.</p>
 									<div class="box alt">
 										<div class="row gtr-50 gtr-uniform">
-											<iframe width="560" height="315" src="https://www.youtube.com/embed/0XgAPfmF7XE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+											<iframe width="560" height="315" src="https://www.youtube.com/embed/q229ROo3SK0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 										</div>
                                     </div>
-									<p style="text-align: justify; margin-bottom: 40px">The above video is in real-time and has not sped up.<br /> 
-										As you can see, there is a notable delay between when the operator's hand moves, to the moment that the robot matches that movement on the screen. This is because the movement needs to be tracked by the 
-										headset's cameras and then be acquired by the PC and then transmitted 44 kilometres over the Internet, then be received and then processed by my laptop on the other end to produce corresponding joint angles and then those joint angles need to be checked to ensure there will be no collisions. Then the joint angles can be sent to the robot. 
-										Then robot executes the movement, then that movement will be recorded by the webcam. The webcam feed then gets processed and send back 44 kilometres over the Internet to the PC. The PC then will receive and process the webcam feed and finally displays it on the monitor.<br />
-									Of course, this huge chain of events will produce delays, but this experiment shows the resulting delay while noticeable, is not too much. This is partly due to good wifi quality at both my house and the University campus and part due to my brilliant design and engineering skills.<br /> 
-									In my opinion, it is possible to do remote pick and place operations. With some help from AI algorithms on the robot's side and some simple training for the operator, this remote pick and place operations can be done safely and reliably. </p>
+									<p style="text-align: justify; margin-bottom: 40px">The above video is in real-time and has not sped up.</p>
 								</section>
 							</div>	
 						</section>	
